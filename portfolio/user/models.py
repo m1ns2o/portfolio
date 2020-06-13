@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 class user(models.Model):
-    username = models.CharField(max_length=64)
+    username = models.CharField(max_length=64, unique=True)
     # useremail = models.EmailField(max_length=128)
     password = models.CharField(max_length=64)
     # registered_dttm = models.DateTimeField(auto_now_add=True)
