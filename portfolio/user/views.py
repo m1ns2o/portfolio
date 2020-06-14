@@ -2,14 +2,9 @@ from django.shortcuts import render,HttpResponse
 from user.models import user, Category, Contents
 from rest_framework import viewsets, generics
 from user.serializers import UserSerializer, CategorySerializer, ContentsSerializer
-# from django.http import HttpResponse
-# from django.views.decorators.csrf import csrf_exempt
-# from django.contrib.auth.hashers import make_password
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 import json
-# import urllib.request
-#오류나면 모듈 임포트
 
 
 # Create your views here.
@@ -26,12 +21,13 @@ class Contents_inp(generics.ListCreateAPIView):
     queryset = Contents.objects.all()
     serializer_class = ContentsSerializer
 
-# @api_view(['POST'])
-# def test(request):
-#     # id = request.POST.get('id')
-#     return Response({
-#         'id':id
-#     })
+class Contents_del(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Contents.objects.all()
+    serializer_class = ContentsSerializer
+
+class Category_del(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
 
 @api_view(['POST'])
 def test(request):

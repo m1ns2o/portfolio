@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import register, Category_inp, Contents_inp, test
+from .views import register, Category_inp, Contents_inp, Contents_del ,test
 from rest_framework.routers import DefaultRouter
 
 # router_register = DefaultRouter()
@@ -18,6 +18,7 @@ urlpatterns = [
     path('register/', register.as_view()),
     # path('register/',include(router_register.urls)),
     path('Contents/', Contents_inp.as_view()),
+    path('Contents/<int:pk>/', Contents_del.as_view()),
     path('Category/', Category_inp.as_view()),
     path('test/', test)
 ]
