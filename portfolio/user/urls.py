@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import register, Category_inp, Contents_inp, Contents_del ,test
+from .views import register, Category_inp, Contents_inp, Contents_del ,Category_del ,test, login, logout
 from rest_framework.routers import DefaultRouter
 
 # router_register = DefaultRouter()
@@ -20,5 +20,8 @@ urlpatterns = [
     path('Contents/', Contents_inp.as_view()),
     path('Contents/<int:pk>/', Contents_del.as_view()),
     path('Category/', Category_inp.as_view()),
-    path('test/', test)
+    path('Category/<int:pk>/', Category_del.as_view()),
+    path('login/', login),
+    path('logout/', logout),
+    path('test/', test),
 ]

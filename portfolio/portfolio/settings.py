@@ -40,11 +40,17 @@ INSTALLED_APPS = [
     'user',
     'rest_framework',
     'rest_framework_swagger',
+    # 'rest_auth',
+    #'rest_framework.authtoken', #토큰 인증
 ]
 
 REST_FRAMEWORK = { # Use Django's standard `django.contrib.auth` permissions, # or allow read-only access for unauthenticated users. 
     'DEFAULT_PERMISSION_CLASSES': [],
-    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+    #'DEFAULT_AUTHENTICATION_CLASSES': [
+    #    'rest_framework.authentication.BasicAuthentication',
+    #    'rest_framework.authentication.SessionAuthentication',
+    #]
 }
 
 # EST_FRAMEWORK = {  }
@@ -57,6 +63,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'django.contrib.sessions.middleware.SessionMiddleware',
 ]
 
 ROOT_URLCONF = 'portfolio.urls'
