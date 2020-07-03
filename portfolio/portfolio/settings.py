@@ -25,7 +25,7 @@ SECRET_KEY = 'qupxt+psrph2l5b$j0rs(l*dv$jsfvtm8&d-v9&c7_2*s9ef#m'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -47,10 +47,6 @@ INSTALLED_APPS = [
 REST_FRAMEWORK = { # Use Django's standard `django.contrib.auth` permissions, # or allow read-only access for unauthenticated users. 
     'DEFAULT_PERMISSION_CLASSES': [],
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
-    #'DEFAULT_AUTHENTICATION_CLASSES': [
-    #    'rest_framework.authentication.BasicAuthentication',
-    #    'rest_framework.authentication.SessionAuthentication',
-    #]
 }
 
 # EST_FRAMEWORK = {  }

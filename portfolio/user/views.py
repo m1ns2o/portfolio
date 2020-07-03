@@ -1,13 +1,12 @@
-from django.shortcuts import render,HttpResponse
+from django.shortcuts import render,HttpResponse, get_object_or_404
 from user.models import user, Category, Contents
 from rest_framework import viewsets, generics
 from user.serializers import UserSerializer, CategorySerializer, ContentsSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 import json
-#토큰 인증
-#from rest_framework.authetication import TokenAuthentication
-#from rest_framework.permissions import IsAutehnticated 
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -31,32 +30,56 @@ class Category_del(generics.RetrieveUpdateDestroyAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
-
+@csrf_exempt
 @api_view(['POST'])
 def test(request):
-    if request.method == 'POST':
-        print(request.data)
-        # inp = json.dumps(request.data)
-        # print(inp)
-        print(request.session.get('user_id'))
-        return Response({"message": "Got some data!", "data": request.data})
-    return Response({"message": "Hello, world!"})
+    user_id = request.data['id']
+    password = request.data['password'] 
+    print(user_id)
+    print(password)
+    user = User.objects.create_user(username=user_id, password=password)
+    return Response('asdfas')
 
+# @csrf_exempt
+# @api_view(['POST'])
+# def test(request):
+#     if request.method == 'POST':
+#         print(request.data)
+#         # inp = json.dumps(request.data)
+#         # print(inp)
+#         print(request.session.get('user_id'))
+#         return Response({"message": "Got some data!", "data": request.data})
+#     return Response({"message": "Hello, world!"})
+
+@csrf_exempt
 @api_view(['POST'])
 def login(request):
     if request.method == 'POST':
         user_id = request.data['id']
         password = request.data['password']
-    request.session['user_id'] = user_id
-    print(request.session['user_id'])
-    return Response({"session":request.session['user_id']})
+        # db_user = user.objects.get(username=user_id)
+        db_user = get_object_or_404(user, username=user_id)
+        request.session['user_pk'] = db_user.id
+        print(db_user.id)
+        print(db_user.username) 
+        print(db_user.password)
+        if user_id == db_user.username and password == db_user:
+            return Response({
+                    "id" : db_user.usename 
+                }) 
+        # return Response({"session":request.session['user_pk']})
+        else :
+            return Response("ERROR")
 
+@csrf_exempt
 @api_view(['POST'])
 def logout(request):
     if request.method == 'POST':
         print(request.session)
-        del request.session['user_id']
+        del request.session['user_pk']
         return Response({'sess':request.session})
+
+
 
      
 
