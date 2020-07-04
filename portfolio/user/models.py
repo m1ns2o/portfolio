@@ -13,7 +13,7 @@ class user(models.Model):
 
 class Category(models.Model):
     owner = models.ForeignKey(user, on_delete=models.CASCADE)
-    # author = models.ForeignKey(settings.AUTH_USER_MODEL)
+    # owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     category_text = models.CharField(max_length=64)
 
     def __str__(self):
