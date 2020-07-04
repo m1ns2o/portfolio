@@ -1,11 +1,11 @@
 from rest_framework import serializers 
-from .models import user, Category, Contents
+from .models import Category, Contents
 
-class UserSerializer(serializers.ModelSerializer): 
-    class Meta: 
-        model = user
-        # fields = ('username', 'password') 
-        fields = '__all__'
+# class UserSerializer(serializers.ModelSerializer): 
+#     class Meta: 
+#         model = user
+#         # fields = ('username', 'password') 
+#         fields = '__all__'
 
 
 class CategorySerializer(serializers.ModelSerializer):

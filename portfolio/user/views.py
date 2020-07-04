@@ -1,7 +1,7 @@
 from django.shortcuts import render,HttpResponse, get_object_or_404
-from user.models import user, Category, Contents
+from user.models import Category, Contents
 from rest_framework import viewsets, generics
-from user.serializers import UserSerializer, CategorySerializer, ContentsSerializer
+from user.serializers import CategorySerializer, ContentsSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 import json
@@ -12,9 +12,9 @@ from django.http import JsonResponse
 
 # Create your views here.
 
-class register(generics.ListCreateAPIView):
-    queryset = user.objects.all()
-    serializer_class = UserSerializer
+# class register(generics.ListCreateAPIView):
+#     queryset = user.objects.all()
+#     serializer_class = UserSerializer
 
 class Category_inp(generics.ListCreateAPIView):
     queryset = Category.objects.all()
