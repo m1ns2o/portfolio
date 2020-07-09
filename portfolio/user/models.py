@@ -23,9 +23,10 @@ class Category(models.Model):
 class Contents(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     title = models.CharField(max_length=64)
-    
+    contents_thumbnail = models.TextField()
     contents_text = models.TextField()
     contents_img = models.TextField()
+    
 
     def __str__(self):
         return self.title

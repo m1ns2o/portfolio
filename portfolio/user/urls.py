@@ -12,5 +12,7 @@ urlpatterns = [
     path('login/', login_view),
     path('logout/', logout_view),
     path('listcategory/', return_category),
-    path('test/', test),
+    path('test/<int:category_key>/', test),
+    # path('listcontents/<int:>/') #foreign key를 url로 받아서 contents list 넘기기 [title,pk]
+
 ]
