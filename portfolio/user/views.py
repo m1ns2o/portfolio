@@ -1,7 +1,7 @@
 from django.shortcuts import render,HttpResponse, get_object_or_404
 from user.models import Category, Contents
 from rest_framework import viewsets, generics
-from user.serializers import CategorySerializer, ContentsSerializer
+from user.serializers import CategorySerializer, ContentsSerializer, ReturnCategory
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 import json
@@ -10,6 +10,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
 from django.forms.models import model_to_dict
+from rest_framework.renderers import JSONRenderer
 
 
 # Create your views here.
@@ -47,8 +48,6 @@ def register(request):
 @csrf_exempt
 @api_view(['POST'])
 def login_view(request):
-    # username = request.POST.get('username')
-    # password = request.POST.get('password')
     username = request.data['username']
     password = request.data['password']
     print(username)
@@ -71,27 +70,31 @@ def logout_view(request):
     return JsonResponse({'logout': 'ok'}, status=401)
     # return Response('logout')
     # return HttpResponseRedirect('')
-
-def test(request):
-    # print(request.user)
+# @renderer_classes((JSONRenderer,))
+def return_category(request):
+    print(request.user)
     user_pk = get_object_or_404(User,username=request.user).id
     print(user_pk)
     category_list = Category.objects.filter(owner=user_pk).values('id', 'category_text')
-    # print(model_to_dict(category_list))
-    # category_list.objects.
-    category_list = list(category_list)
-    print(category_list)
-    # category_id = Category.objects.filter(owner=user_pk, category_text_in(category_list)) 
+    # data = ReturnCategory.serialize('json', category_list)
+    serialized_data = ReturnCategory(category_list, many=True)
+    # category_list = tuple(category_list)
+    print(serialized_data.data)
+    # serialized_data.save
+    # return JsonResponse(serialized_data.data, status=200)
+    return JsonResponse(serialized_data.data, safe=False)
+    json = JSONRenderer().render(serialized_data.data)
+    print(json)
+    
+    
+    # return Response(seriaAssertionErrorlized_data.data)
+    return Response(json)
+    # return JsonResponse(serialized_data.data, json_dumps_params = {'ensure_ascii': True})
+    
 
-    # for i in category_list:
-    #     category_id = Category.objects.filter(owner=user_pk, category_text=i)
-    # print(Category.objects.all())
-    # print(list(Category.object.all()))
-    # print(category_list)
-    # print(category_id)
-    # print(category_list[0])
-    return JsonResponse({'user_pk':category_list}, status=200)
-    # return Response(category_list)
+def test(request):
+    # category = Contents.objects.filter(category=request.data['pk'])
+    pass
 
 
 

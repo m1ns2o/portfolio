@@ -17,3 +17,8 @@ class ContentsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contents
         fields = '__all__'
+
+class ReturnCategory(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ['id', 'category_text']
