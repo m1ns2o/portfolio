@@ -11,6 +11,6 @@ urlpatterns = [
     path('Category/<int:pk>/', Category_del.as_view()),
     path('login/', login_view),
     path('logout/', logout_view),
-    path('listcategory/', return_category),
+    path('listcategory/<str:username>/', return_category),
     path('listcontents/<int:category_key>/', return_contents),
 ]

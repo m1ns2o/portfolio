@@ -50,8 +50,9 @@ def logout_view(request):
     logout(request)
     return JsonResponse({'logout': 'ok'}, status=401)
 
-def return_category(request):
-    user_pk = get_object_or_404(User,username=request.user).id
+def return_category(request, username):
+    # user_pk = get_object_or_404(User,username=request.user).id
+    user_pk = get_object_or_404(User,username=username).id
     category_list = Category.objects.filter(owner=user_pk).values('id', 'category_text')
     serialized_data = ReturnCategory(category_list, many=True)
     return JsonResponse(serialized_data.data, safe=False)
