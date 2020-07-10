@@ -1,13 +1,6 @@
 from rest_framework import serializers 
 from .models import Category, Contents
 
-# class UserSerializer(serializers.ModelSerializer): 
-#     class Meta: 
-#         model = user
-#         # fields = ('username', 'password') 
-#         fields = '__all__'
-
-
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
@@ -26,4 +19,4 @@ class ReturnCategory(serializers.ModelSerializer):
 class ReturnContents(serializers.ModelSerializer):
     class Meta:
         model = Contents
-        fields = ['id', 'title', 'contents_thumbnail'] #썸네일 추가할까?
+        fields = ['id', 'title', 'contents_thumbnail'] 
