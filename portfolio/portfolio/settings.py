@@ -40,8 +40,7 @@ INSTALLED_APPS = [
     'user',
     'rest_framework',
     'rest_framework_swagger',
-    # 'rest_auth',
-    #'rest_framework.authtoken', #토큰 인증
+    'corsheaders',
 ]
 
 REST_FRAMEWORK = { # Use Django's standard `django.contrib.auth` permissions, # or allow read-only access for unauthenticated users. 
@@ -59,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     # 'django.contrib.sessions.middleware.SessionMiddleware',
 ]
 
@@ -92,6 +92,9 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS =True
 
 
 # Password validation
