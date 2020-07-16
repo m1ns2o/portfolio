@@ -42,7 +42,8 @@ def login_view(request):
     user = authenticate(request, username=username, password=password)
     if user is not None:
         login(request, user)
-        return Response('login')
+        user_pk = get_object_or_404(User,username=username).id
+        return Response(user_pk)
     else:
         return Response('Error')
 
