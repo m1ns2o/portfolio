@@ -58,7 +58,7 @@ def return_category(request, username):
     return JsonResponse(serialized_data.data, safe=False)
 
 def return_contents(request, category_key):
-    contents_list = Contents.objects.filter(category=category_key).values('id', 'title') # 썸네일 추가?
+    contents_list = Contents.objects.filter(category=category_key).values('id', 'title','contents_thumbnail') # 썸네일 추가?
     serialized_data = ReturnContents(contents_list, many=True)
     return JsonResponse(serialized_data.data, safe=False)
 
